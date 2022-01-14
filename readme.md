@@ -1,7 +1,7 @@
 ﻿# Naive Circuit Simulator
 It's a simple electric circuit solver written in C++. It actually can not solve all kind of circuits, but only the series and parallel ones. You can easily draw a circuit including a number of wires, resistors and batteries, and it calculates the current and voltage through resistors and batteries.
 
-**You can download binaries here:**  link
+**You can download binaries [here](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/releases/tag/v1.0)** 
 
 ![Naive Circuit Simulator](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/blob/master/Pics/main.png)
 
