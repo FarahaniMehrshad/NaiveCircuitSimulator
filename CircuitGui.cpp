@@ -120,7 +120,7 @@ bool CircuitGui::OnUserCreate()
 	}
 
 	Clear(_darkBlue);
-	drawMenu();
+	drawTitleBar();
 	drawToolBar();
 	drawBorders();
 	drawField();
@@ -572,25 +572,25 @@ std::string CircuitGui::removeNumberTrailer(std::string number) const
 /*
 --------------- Drawing routine ---------------
 */
-void CircuitGui::drawMenu()
+void CircuitGui::drawTitleBar()
 {
-	FillRect(0, 0, _menuWidth, _menuHeight, _blue);
+	FillRect(0, 0, _titleBarWidth, _titleBarHeight, _blue);
 
-	FillRect(0, _menuHeight, _menuWidth, 2, _neonBlue);
+	FillRect(0, _titleBarHeight, _titleBarWidth, 2, _neonBlue);
 
-	DrawString(10, 10, "Naive Circuit Simulator V 1.0", _neonBlue, 2);
+	DrawString(10, 10, "Naive Circuit Simulator V 1.1", _neonBlue, 2);
 }
 
 void CircuitGui::drawToolBar()
 {
-	FillRect(ScreenWidth() - 15 - _toolBarWidth, _menuHeight + _toolBarOffsetY, _toolBarWidth, _toolBarHeight, _blue);
+	FillRect(ScreenWidth() - 15 - _toolBarWidth, _titleBarHeight + _toolBarOffsetY, _toolBarWidth, _toolBarHeight, _blue);
 
 	// Border top and bottom
-	FillRect(ScreenWidth() - 15 - _toolBarWidth, _menuHeight + _toolBarOffsetY, _toolBarWidth, 2, _neonBlue);
-	FillRect(ScreenWidth() - 15 - _toolBarWidth, _menuHeight + _toolBarOffsetY + _toolBarHeight, _toolBarWidth, 2, _neonBlue);
+	FillRect(ScreenWidth() - 15 - _toolBarWidth, _titleBarHeight + _toolBarOffsetY, _toolBarWidth, 2, _neonBlue);
+	FillRect(ScreenWidth() - 15 - _toolBarWidth, _titleBarHeight + _toolBarOffsetY + _toolBarHeight, _toolBarWidth, 2, _neonBlue);
 	// Border left and right
-	FillRect(ScreenWidth() - 15 - _toolBarWidth, _menuHeight + _toolBarOffsetY, 2, _toolBarHeight, _neonBlue);
-	FillRect(ScreenWidth() - 15, _menuHeight + _toolBarOffsetY, 2, _toolBarHeight + 2, _neonBlue);
+	FillRect(ScreenWidth() - 15 - _toolBarWidth, _titleBarHeight + _toolBarOffsetY, 2, _toolBarHeight, _neonBlue);
+	FillRect(ScreenWidth() - 15, _titleBarHeight + _toolBarOffsetY, 2, _toolBarHeight + 2, _neonBlue);
 
 	// Wire
 	drawWire(812, 100, CO_RIGHT, "", _green, 3);
@@ -616,7 +616,7 @@ void CircuitGui::drawToolBar()
 
 void CircuitGui::drawField()
 {
-	FillRect(2, _menuHeight + 2, ScreenWidth() - _toolBarWidth - _toolBarOffsetX + 12, ScreenHeight() - _menuHeight - 4, _darkBlue);
+	FillRect(2, _titleBarHeight + 2, ScreenWidth() - _toolBarWidth - _toolBarOffsetX + 12, ScreenHeight() - _titleBarHeight - 4, _darkBlue);
 
 	int startX = 20;
 	int startY = 60;

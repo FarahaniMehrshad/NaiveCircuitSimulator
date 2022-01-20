@@ -80,7 +80,7 @@ private:
 	void selectBlank();
 
 private:
-	void drawMenu();
+	void drawTitleBar();
 	void drawToolBar();
 	void drawField();
 	void drawBorders();
@@ -108,8 +108,8 @@ private:
 	const int _screenWidth = 900;
 	const int _screenHeight = 600;
 
-	const int _menuWidth = 900;
-	const int _menuHeight = 30;
+	const int _titleBarWidth = 900;
+	const int _titleBarHeight = 30;
 
 	const int _toolBarOffsetX = 30;
 	const int _toolBarOffsetY = 40;
