@@ -516,7 +516,7 @@ bool CircuitGui::hasMouseOverlap(Item & item) const
 
 double CircuitGui::roundDecimal(double number) const
 {
-	return std::ceil(number * 100.0) / 100.0;
+	return std::ceil(number * 1000.0) / 1000.0;
 }
 
 Dot * CircuitGui::getNearDot(int x, int y)
