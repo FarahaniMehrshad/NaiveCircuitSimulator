@@ -47,16 +47,25 @@ CircuitCore::~CircuitCore()
 
 Element* CircuitCore::addWire(std::string name, std::string negativeSide, std::string positiveSide)
 {
+	if (negativeSide == positiveSide)
+		throw TWO_SAME_NODES;
+
 	return addElement(name, 0, 0, 0, negativeSide, positiveSide);
 }
 
 Element* CircuitCore::addResistor(std::string name, double resistance, std::string negativeSide, std::string positiveSide)
 {
+	if (negativeSide == positiveSide)
+		throw TWO_SAME_NODES;
+
 	return addElement(name, 0, 0, resistance, negativeSide, positiveSide);
 }
 
 Element* CircuitCore::addBattery(std::string name, double voltage, std::string negativeSide, std::string positiveSide)
 {
+	if (negativeSide == positiveSide)
+		throw TWO_SAME_NODES;
+
 	return addElement(name, voltage, 0, 0, negativeSide, positiveSide);
 }
 
@@ -339,27 +348,7 @@ Element * CircuitCore::merge(Element * el1, Element * el2)
 		   If an element tries to be merged with a battery, we need to make sure
 		   the negative and positive sides stay the same
 		*/
-		if (!isBattery(el1) && isBattery(el2))
-		{
-			if (!(node1 == el2->_node1 || node2 == el2->_node2))
-			{
-				Node* temp = node1;
-				node1 = node2;
-				node2 = temp;
-			}
-		}
-
-		if (isBattery(el1) && !isBattery(el2))
-		{
-			if (!(node1 == el1->_node1 || node2 == el1->_node2))
-			{
-				Node* temp = node1;
-				node1 = node2;
-				node2 = temp;
-			}
-		}
-
-		if (isBattery(el1) && isBattery(el2))
+		if (isBattery(el1) || isBattery(el2))
 		{
 			if (node1 != el1->_node1 && node1 != el2->_node1)
 			{

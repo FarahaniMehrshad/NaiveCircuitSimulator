@@ -76,7 +76,7 @@ CircuitGui::CircuitGui()
 {
 	_circuitCore = new CircuitCore();
 
-	if (!Construct(_screenWidth, _screenHeight, 1, 1, false, true, true))
+	if (!Construct(_screenWidth, _screenHeight, 1, 1, false, true))
 		throw "Failed to construct the window";
 
 	sAppName = "Naive circuit simulator - Made with olc pixel game engine - By Mehrshad Jafari Farahani";
