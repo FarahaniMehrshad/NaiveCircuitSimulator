@@ -1,5 +1,5 @@
 ﻿# Naive Circuit Simulator
-It's a simple electric circuit solver written in C++. It actually can not solve all kind of circuits, but only the series and parallel ones. You can easily draw a circuit including a number of wires, resistors and batteries, and it calculates the current and voltage through resistors and batteries.
+It's an electric circuit solver written in C++, and it's called naive because it can only solve series and parallel circuits. You can use it to calculate the voltage and current of each element in the circuit.
 
 **You can download binaries [here](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/releases/tag/v1.0)** 
 
@@ -9,19 +9,17 @@ It's a simple electric circuit solver written in C++. It actually can not solve 
  
 
  - [How to use?](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#how-to-use)
- - [How to build?](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#how-to-build)
+ - [Build](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#build)
  - [Circuit Core](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#circuit-core)
  - [Circuit Gui](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#circuit-gui)
- - [How does it work?](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#how-does-it-work)
+ - [The algorithm](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#how-does-it-work)
 
 # How to use?
-There is a toolbar at the right side. You can select different items like: wire, resistor, voltage source(battery), and blank(for removing an element).
-You can also use shortcut keys: **W** for wire, **R** for resistor, **V** for voltage source, **B** for blank, and **ESC** to unselect an item.
-After you done with drawing, move your cursor on an element to see its current and voltage.
+There is a toolbar on the right. You can choose between different items such as wire, resistor, a voltage source (battery), and blank (to remove elements in the circuit). By moving the mouse pointer on each element, you can quickly draw a circuit and see the current and voltage. You can also use the shortcut keys corresponding to each item.
 
 ![Naive Circuit Simulator](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/blob/master/Pics/CircuitGif.gif)
 
-# How to build?
+# Build
 First make sure you're Mingw compiler is up-to-date. Then put all files into the same folder and follow the instructions:
 ### Windows
 Build:
@@ -47,16 +45,16 @@ Run:
     ./NaiveCircuitSimulator
 
 # Circuit Core
-You can use the core itself to solve circuits without using gui.
+You can use the circuit core to solve circuits without the need for a graphical environment.
 Consider this circuit:
 
 ![Simple Electric Circuit](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/blob/master/Pics/Circuit.PNG)
 
-First we give all nodes and elements a unique name like so:
+First, we give all nodes and elements a unique name like so:
 
 ![](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/blob/master/Pics/Circuit2.png)
 
-Then we ask the core to solve the circuit for us:
+Then we ask the core to solve the circuit for us.
 
  ``` cpp
  #include "CircuitCore.h"
@@ -94,7 +92,6 @@ int main()
 			std::cout << "R: " << element->getResistance() << " ";
 			std::cout << std::endl;
 		}
-		// You can also use printElements() function
 	}
 	catch(CircuitCore::Errors error)
 	{
@@ -135,7 +132,7 @@ Will print:
     R2 I: 1.2 V: 6 R: 5
     B2 I: 1.2 V: 12 R: 0
 
-You could also omit the wires by giving the nodes that have same potential a same name:
+You could also omit the wires by giving the nodes with the same potential an identical name:
 
 ![](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/blob/master/Pics/Circuit3.png)
 
@@ -144,7 +141,7 @@ You could also omit the wires by giving the nodes that have same potential a sam
 	circuit->addBattery("B1", 24, "b", "c");
 	circuit->addBattery("B2", 12, "a", "d");
 
-***Caution**: Once a circuit gets solved, it will be marked as **dirty** and you can not modify it. You should delete the circuit and create another one.*
+***Caution**: Once a circuit gets solved, it will be marked as **dirty** and you cannot modify it. You should delete the circuit and create another one.*
 ### List of functions
 Here is the list of functions you can use:
 
@@ -165,14 +162,13 @@ Here is the list of functions you can use:
 	bool dirty()
 
 # Circuit Gui
-The graphical part works completely separate from core. You may want to use the program's gui and implement the circuit solving algorithm yourself.
-Fine! just take care of these functions. These are the functions which are responsible for creating a circuit and reading data from it.
+The code of the graphic part of the program is written entirely independent of the core. You may prefer to use only the program graphics and implement the circuit-solving algorithm yourself. There are only two functions that communicate with the core, and by changing these functions, you can reach your goal.
 
     void CircuitGui::createAndSolveCircuit()
     void CircuitGui::drawItemInfo(Item & item)
 
-# How does it work?
-While it is not very easy to explain the algorithm in details, but let's have a try.
+# The algorithm
+While it is not very easy to explain the algorithm in detail, let's try.
 Consider this circuit:
 
 ![](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/blob/master/Pics/SampleCircuit.PNG)
@@ -185,11 +181,11 @@ We can calculate the equivalent resistance with some basic formulas:
 Series: **Rt = R1 + R2**
 Parallel Rt = (**R1 ^ -1 + R2 ^ -1) ^ -1**
 
-Now we continue merging elements and calculate the equivalent resistance in each steps, till there's only one element left.
-At this point we can calculate the total current in circuit using **I = V / Rt** formula.
-Then we continue unmerging elements and spread the current through each elements.
+We keep merging elements and calculate the equivalent resistance in each step till there's only one element left.
+Using the I = V / Rt formula, we can calculate the total current in circuit.
+Then we continue unmerging elements and spread the current through each element.
 
-If you focus, this process is actually a tree like structure on its nature.
+Now If you focus, this process is a tree-like structure in its nature.
 
 The **“—”** symbol is used here to represent **“series,”** just as the **“||”** symbol is used to represent **“parallel.”**
 
