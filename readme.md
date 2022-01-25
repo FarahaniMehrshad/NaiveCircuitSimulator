@@ -13,6 +13,7 @@ It's an electric circuit solver written in C++, and it's called naive because it
  - [Circuit Core](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#circuit-core)
  - [Circuit Gui](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#circuit-gui)
  - [The algorithm](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#how-does-it-work)
+ - [Thanks](https://github.com/FarahaniMehrshad/NaiveCircuitSimulator/#thanks)
 
 # How to use?
 There is a toolbar on the right. You can choose between different items such as wire, resistor, a voltage source (battery), and blank (to remove elements in the circuit). By moving the mouse pointer on each element, you can quickly draw a circuit and see the current and voltage. You can also use the shortcut keys corresponding to each item.
@@ -205,6 +206,9 @@ Now we came up with a structure like this:
 	    children_connection(series or parallel)
     }
 ```
+
+# Thanks
+Special thanks to my professor at the University of Isfahan, Dr. Kamal Jamshidi, who inspired me to make this program.
 
 
 
